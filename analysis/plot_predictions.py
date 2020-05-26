@@ -4,16 +4,19 @@ from sklearn.model_selection import train_test_split
 import torch
 import pkg_resources
 pkg_resources.require("torch==1.0.0")
+import sys
+sys.path.append('..')
 import load_data
 import helper_functions
 import spectroscopy_cnn_model
+import os
 
 
-spectra_predicted = np.load('predictions/exp17.npz')['validation_data']
+spectra_predicted = np.load(os.path.join(os.path.dirname(__file__),'../predictions/exp17.npz'))['validation_data']
 
 #Load data with same seed to be able to compare
-coulomb = np.absolute(np.load('coulomb.npz')['coulomb'])
-energies = np.load('spectra.npz')['spectra']
+coulomb = np.absolute(np.load(os.path.join(os.path.dirname(__file__),'../data/coulomb.npz'))['coulomb'])
+energies = np.load(os.path.join(os.path.dirname(__file__),'../data/spectra.npz'))['spectra']
 train_split = 0.9
 val_test_split = 0.5
 coulomb_train, coulomb_test, energies_train, energies_test = train_test_split(coulomb, energies, test_size = 1.0-train_split, random_state=0)
@@ -26,11 +29,11 @@ def relative_difference(prediction, label):
 
 	return 1-np.sqrt(numerator)/denominator
 
-validation_loader = load_data.load_experiment_data('spectra.npz','validation')
+validation_loader = load_data.load_experiment_data(os.path.join(os.path.dirname(__file__),'../data/spectra.npz'),'validation', relative_path=True)
 model = spectroscopy_cnn_model.create_network(300)
 
 
-model.load_state_dict(torch.load('results/model_exp17.pth', map_location='cpu'))
+model.load_state_dict(torch.load(os.path.join(os.path.dirname(__file__),'../results/model_exp17.pth'), map_location='cpu'))
 model.eval()
 rmse_accuracy = helper_functions.get_model_error(validation_loader, model, True)
 

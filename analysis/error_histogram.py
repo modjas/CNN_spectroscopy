@@ -1,6 +1,10 @@
 import torch
 import pkg_resources
+import sys
+import os
+sys.path.append('..')
 pkg_resources.require("torch==1.0.0")
+
 
 import load_data
 import helper_functions
@@ -8,12 +12,12 @@ import spectroscopy_cnn_model
 import matplotlib.pyplot as plt
 import numpy as np
 
-validation_loader = load_data.load_experiment_data('spectra.npz','validation')
+validation_loader = load_data.load_experiment_data(os.path.join(os.path.dirname(__file__),'../data/spectra.npz'),'validation', relative_path=True)
 model = spectroscopy_cnn_model.create_network(300)
 
 
 
-model.load_state_dict(torch.load('results/model_exp17.pth', map_location='cpu'))
+model.load_state_dict(torch.load(os.path.join(os.path.dirname(__file__),'../results/model_exp17.pth'), map_location='cpu'))
 model.eval()
 rmse_accuracy = helper_functions.get_model_error(validation_loader, model, True)
 

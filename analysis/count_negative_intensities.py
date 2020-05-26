@@ -1,11 +1,12 @@
 import numpy as np
+import os
 
 
-predictions_rmse = np.load('predictions/exp17_normalized.npz')['validation_data']
-predictions_smooth = np.load('predictions/exp22_normalized.npz')['validation_data']
-predictions_logcosh = np.load('predictions/exp23_normalized.npz')['validation_data']
-predictions_cos = np.load('predictions/exp39_normalized.npz')['validation_data']
-predictions_pearson = np.load('predictions/exp40_normalized.npz')['validation_data']
+predictions_rmse = np.load(os.path.join(os.path.dirname(__file__), '../predictions/exp17_normalized.npz'))['validation_data']
+predictions_smooth = np.load(os.path.join(os.path.dirname(__file__), '../predictions/exp22_normalized.npz'))['validation_data']
+predictions_logcosh = np.load(os.path.join(os.path.dirname(__file__), '../predictions/exp23_normalized.npz'))['validation_data']
+predictions_cos = np.load(os.path.join(os.path.dirname(__file__), '../predictions/exp39_normalized.npz'))['validation_data']
+predictions_pearson = np.load(os.path.join(os.path.dirname(__file__), '../predictions/exp40_normalized.npz'))['validation_data']
 
 datapoints = len(predictions_rmse)*300
 

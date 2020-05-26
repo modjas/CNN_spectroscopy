@@ -1,13 +1,12 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-losses_1 = np.load('results/traintest_lossexp17.npz')
-losses_2 = np.load('results/traintest_lossexp41.npz')
-losses_3 = np.load('results/traintest_lossexp42.npz')
-losses_4 = np.load('results/traintest_lossexp39.npz')
-losses_5 = np.load('results/traintest_lossexp40.npz')
-
-
+losses_1 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp17.npz'))
+losses_2 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp41.npz'))
+losses_3 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp42.npz'))
+losses_4 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp39.npz'))
+losses_5 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp40.npz'))
 
 
 

@@ -35,13 +35,10 @@ class Net(nn.Module):
 
 
 def weights_init(m):
-	#default gain=1, should possibly be sqrt(2)
 	if isinstance(m, nn.Conv2d):
-		#nn.init.xavier_uniform_(m.weight.data, gain=nn.init.calculate_gain('relu'))
 		nn.init.xavier_uniform_(m.weight.data, gain=1)
 		nn.init.constant_(m.bias,0)
 	if isinstance(m, nn.Linear):
-		#nn.init.xavier_uniform_(m.weight.data, gain=nn.init.calculate_gain('relu'))
 		nn.init.xavier_uniform_(m.weight.data, gain=1)
 		nn.init.constant_(m.bias,0)
 

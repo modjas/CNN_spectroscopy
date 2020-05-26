@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-spectra_01 = np.loadtxt('spectra_sigma0.1.txt')
-spectra_03 = np.loadtxt('spectra_500_sigma0.1.txt')
-spectra_05 = np.loadtxt('spectra_700_sigma0.1.txt')
+spectra_01 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_sigma0.1.txt'))
+spectra_03 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_500_sigma0.1.txt'))
+spectra_05 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_700_sigma0.1.txt'))
 
 ticks1 = np.linspace(-30, 0, num=300)
 ticks2 = np.linspace(-30, 0, num=500)

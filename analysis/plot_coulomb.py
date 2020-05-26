@@ -1,8 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
+import os
 
-coulomb = np.absolute(np.load('coulomb.npz')['coulomb'])
+coulomb = np.absolute(np.load(os.path.join(os.path.dirname(__file__),'../data/coulomb.npz'))['coulomb'])
 
 coulomb17 = coulomb[16]
 

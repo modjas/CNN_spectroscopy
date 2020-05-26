@@ -22,11 +22,11 @@ device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("Device is {}".format(device))
 
 #Handle file and output arguments
-spectra_file = sys.argv[1]
+spectra_file = 'data/' + sys.argv[1]
 runtime = int(sys.argv[2])
 experiment_number = sys.argv[3]
 criterion_string = sys.argv[4]
-spectra_name = spectra_file[:-4]
+spectra_name = sys.argv[1][:-4]
 output_spectra_length = int(sys.argv[5])
 print("Running training on Spectra: {} for {} epochs. Experiment number {}".format(spectra_name, runtime, experiment_number))
 
@@ -64,7 +64,7 @@ def train(epoch):
 		loss.backward()
 		optimizer.step()
 		if batch_idx % 100 == 0:
-			print("Train Epoch: {} [{}/{} ({:.0f} %)".format(epoch, batch_idx * len(data), len(train_loader.dataset), 100*batch_idx/len(train_loader)))
+			print("Train Epoch: {} [{}/{}] ({:.0f} %)".format(epoch, batch_idx * len(data), len(train_loader.dataset), 100*batch_idx/len(train_loader)))
 		batch_losses.append(loss.item())
 	if criterion_string == "rmse":
 		train_loss.append(np.sqrt(np.mean(batch_losses)))
@@ -106,7 +106,7 @@ def test():
 
 def run_train_test(epochs):
 
-	for epoch in range(1, epochs):
+	for epoch in range(1, epochs+1):
 		print("Epoch {} out of {}".format(epoch, epochs))
 		train(epoch)
 		test()
@@ -124,12 +124,12 @@ def run_train_test(epochs):
 
 
 		print("Epochs since improved testing error: {} \n".format(helper_functions.earlystop_criterion(test_losses)))
-#		if helper_functions.earlystop_criterion(test_losses) > 150:
-#			print("Training ended early because of slow improvement.")
-#			break
+		if helper_functions.earlystop_criterion(test_losses) > 150:
+			print("Training ended early because of slow improvement.")
+			break
 
 #Run train and test
 starttime = timeit.default_timer()
 run_train_test(runtime)
 print("Training took {} ".format(timeit.default_timer()-starttime))
-print("Minimum testing error was {} and occured at epoch {}".format(min(test_losses), np.argmin(test_losses)))
+print("Minimum testing error was {} and occured at epoch {}".format(min(test_losses), np.argmin(test_losses)+1))

@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-spectra_01 = np.loadtxt('spectra_sigma0.1.txt')
-spectra_03 = np.loadtxt('spectra_sigma0.3.txt')
-spectra_05 = np.loadtxt('spectra_sigma0.5.txt')
+spectra_01 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_sigma0.1.txt'))
+spectra_03 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_sigma0.3.txt'))
+spectra_05 = np.loadtxt(os.path.join(os.path.dirname(__file__),'../data/spectra_sigma0.5.txt'))
 
 
 

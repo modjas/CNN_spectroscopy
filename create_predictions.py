@@ -10,11 +10,12 @@ import helper_functions
 import spectroscopy_cnn_model
 import load_data
 import numpy as np
+import os
 
 normalize = sys.argv[1]
 
 output_spectra_length = 300
-spectra_file = 'spectra.npz'
+spectra_file = 'data/spectra.npz'
 experiment_model = 'exp42'
 
 

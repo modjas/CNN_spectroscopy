@@ -7,8 +7,11 @@ pkg_resources.require("torch==1.0.0")
 
 #Load data
 
-def load_experiment_data(spectra_file, data_specified, batch_size_train = 90, batch_size_test = 1000, batch_size_validation=1):
-	coulomb = np.absolute(np.load('coulomb.npz')['coulomb'])
+def load_experiment_data(spectra_file, data_specified, batch_size_train = 90, batch_size_test = 1000, batch_size_validation=1, relative_path=False):
+	if relative_path == False: #depending on if in root folder or not
+		coulomb = np.absolute(np.load('data/coulomb.npz')['coulomb'])
+	else:
+		coulomb = np.absolute(np.load('../data/coulomb.npz')['coulomb'])
 
 	if spectra_file[-4:] == '.txt':
 		energies = np.loadtxt(spectra_file)

@@ -1,9 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
-losses_300 = np.load('results/traintest_lossexp17.npz')
-losses_500 = np.load('results/traintest_lossexp19.npz')
-losses_700 = np.load('results/traintest_lossexp18.npz')
+losses_300 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp18.npz'))
+losses_500 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp20.npz'))
+losses_700 = np.load(os.path.join(os.path.dirname(__file__),'../results/traintest_lossexp21.npz'))
 
 
 
@@ -24,20 +25,20 @@ def plot_spectra():
 	plt.plot(test_loss_300, label='Test loss', linewidth = 3.0)
 	plt.plot(train_loss_300, label='Train loss', linewidth = 3.0)
 	plt.ylabel('Loss')
-	plt.title('$\sigma=0.5$')
+	plt.title('$Np=300$')
 	plt.legend()
 	plt.subplot(312)
 	plt.plot(test_loss_500, label='Test loss', linewidth = 3.0)
 	plt.plot(train_loss_500, label='Train loss', linewidth = 3.0)
 	plt.ylabel('Loss')
-	plt.title('$\sigma=0.3$')
+	plt.title('$Np=500$')
 	plt.legend()
 	plt.subplot(313)
 	plt.plot(test_loss_700, label='Test loss', linewidth = 3.0)
 	plt.plot(train_loss_700, label='Train loss', linewidth = 3.0)
 	plt.legend()
 	plt.ylabel('Loss')
-	plt.title('$\sigma=0.1$')
+	plt.title('$Np=700$')
 	plt.xlabel('Epoch')
 
 	fig
